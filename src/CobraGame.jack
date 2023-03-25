@@ -1,0 +1,183 @@
+class CobraGame {
+    // the cobra
+    field Cobra cobra;
+
+    // the game grid
+    field CobraGrid grid;
+
+    // the score
+    field int score;
+
+    // the game cycle
+    field int cycle;
+
+    // how long to wait between cycles
+    field int delay;
+
+    // creates a new cobraGame
+    constructor CobraGame new() {
+
+        // use the delay in the user pressing a key to position the first PRS point
+        do Random.setSeed(RandSeed.getSeed());
+
+        // init game vars
+        let score = 0;
+        let cycle = 0;
+        let delay = 100;
+
+        // create the grid
+        let grid = CobraGrid.new(this, 512, 256);
+
+        // create the cobra
+        let cobra = Cobra.new(this, grid.sizeX() / 2, grid.sizeY() / 2, 17, 5);
+
+        do grid.placePoint();
+        do grid.drawStatus();
+
+        return this;
+    }
+
+    // disposes of a cobraGame
+    method void dispose() {
+        do cobra.dispose();
+        do grid.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    // run the game
+    method void run() {
+        var boolean broken;
+        var boolean exit;
+        var int key;
+		var String tString;
+
+        // loop until told to exit
+        let exit = false;
+        while(~exit) {
+            do cobra.rememberDir();
+
+            // normal unpaused loop
+            let key = Keyboard.keyPressed();
+
+            if (key = 130) {
+                // left arrow, valid only if we were going up or down
+                if (cobra.getLastDir() = 1) {
+                    do cobra.setDir(3);
+                }
+                if (cobra.getLastDir() = 2) {
+                    do cobra.setDir(3);
+                }
+            }
+			
+            if (key = 131) {
+                // up arrow, valid only if we were going left or right
+                if (cobra.getLastDir() = 3) {
+                    do cobra.setDir(1);
+                }
+                if (cobra.getLastDir() = 4) {
+                    do cobra.setDir(1);
+                }
+            }
+			
+            if (key = 132) {
+                // right arrow, valid only if we were going up or down
+                if (cobra.getLastDir() = 1) {
+                    do cobra.setDir(4);
+                }
+                if (cobra.getLastDir() = 2) {
+                    do cobra.setDir(4);
+                }
+            }
+			
+            if (key = 133) {
+                // down arrow, valid only if we were going left or right
+                if (cobra.getLastDir() = 3) {
+                    do cobra.setDir(2);
+                }
+                if (cobra.getLastDir() = 4) {
+                    do cobra.setDir(2);
+                }
+            }
+
+            // try to move one square in the current direction
+            if (~cobra.tryMove()) {
+                do grid.drawCrashed();
+				do Output.moveCursor(10, 15);
+				let tString = "You LOST :( The cobra was injured.";
+				do Output.printString(tString);
+				do tString.dispose();
+                do Sys.halt();
+            }
+
+            // have we "eaten" a PRS point?
+            if (grid.checkPoint(cobra.posX(), cobra.posY())) {
+                do cobra.eatPoint();
+                do IncreasePoints();
+                do grid.placePoint();
+            }
+
+            // make the cobra grow
+            // takes care of drawing the new head, growing if
+            // needed, and clearing the old tail if not
+            do cobra.grow(cycle);
+
+            // redraw the point, status, delay and increment the cycle
+            do grid.drawPoint();
+            do grid.drawStatus();
+            do Sys.wait(delay);
+            do nextCycle();
+
+            // check if the cobra's history needs to be rewritten
+            if (cobra.checkRewriteHistory()) {
+                let cycle = cobra.getLength();
+            }
+
+        }
+
+        do grid.drawDone();
+        do Sys.halt();
+        return;
+    }
+
+    // bumps the game to the next level
+    method void IncreasePoints() {
+		var String tString;
+        let score = score + 5;
+		if (score = 105) {
+			do grid.drawDone();
+			do Output.moveCursor(10, 17);
+			let tString = "Congratulations! You WON!!!";
+			do Output.printString(tString);
+			do tString.dispose();
+			do Sys.halt();
+		}
+        if (delay > 30) {
+            let delay = delay - 5;
+        }
+        return;
+    }
+
+    // increment the cycle count by 1
+    method int nextCycle() {
+        let cycle = cycle + 1;
+        return cycle;
+    }
+
+    // reader methods
+    method CobraGrid getGrid() {
+        return grid;
+    }
+	
+    method Cobra getCobra() {
+        return cobra;
+    }
+	
+    method int getCycle() {
+        return cycle;
+    }
+	
+    method int getScore() {
+        return score;
+    }
+}
