@@ -21,7 +21,9 @@
 
 Авторы:
 <a href="https://github.com/antoshkaxxr" target="_blank">Габов Антон</a>
+
 <a href="https://github.com/IlyaTucha" target="_blank">Атучин Илья</a>
+
 <a href="https://github.com/GlebMoskalev" target="_blank">Москалев Глеб</a>
 
 <p align="center">
