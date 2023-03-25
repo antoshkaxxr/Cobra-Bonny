@@ -18,3 +18,8 @@
 Конечно, нужно постараться избежать столкновения с ними, иначе игра будет завершена досрочно!
 
 Сможете ли Вы помочь Бонни в этом непростом деле? На кону - 100 баллов БРС!
+
+
+<p align="center">
+  <img width="100" height="100" src="https://github.com/antoshkaxxr/Cobra-Bonny/blob/main/Cobra%20Bonnie.gif?raw=true">
+</p>
