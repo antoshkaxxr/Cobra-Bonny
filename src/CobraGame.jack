@@ -142,7 +142,7 @@ class CobraGame {
 
     // bumps the game to the next level
     method void IncreasePoints() {
-		var String tString;
+	var String tString;
         let score = score + 5;
 		if (score = 105) {
 			do grid.drawDone();
