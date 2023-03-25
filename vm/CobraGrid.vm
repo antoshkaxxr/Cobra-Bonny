@@ -1,0 +1,1691 @@
+function CobraGrid.new 0
+push constant 6
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push argument 1
+push constant 4
+call Math.divide 2
+pop this 1
+push argument 2
+push constant 16
+sub
+push constant 4
+call Math.divide 2
+pop this 2
+push pointer 0
+call CobraGrid.initGrid 1
+pop temp 0
+push pointer 0
+return
+function CobraGrid.dispose 2
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push this 1
+lt
+not
+if-goto WHILE_END0
+push local 0
+push this 5
+add
+pop pointer 1
+push that 0
+pop local 1
+push local 1
+call Array.dispose 1
+pop temp 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function CobraGrid.placePoint 3
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+not
+not
+if-goto WHILE_END0
+push this 1
+call Random.randRange 1
+pop local 1
+push this 2
+call Random.randRange 1
+pop local 2
+push pointer 0
+push local 1
+push local 2
+call CobraGrid.checkOccupied 3
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+not
+pop local 0
+label IF_FALSE0
+goto WHILE_EXP0
+label WHILE_END0
+push local 1
+pop this 3
+push local 2
+pop this 4
+push constant 0
+return
+function CobraGrid.drawPoint 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push this 3
+push constant 4
+call Math.multiply 2
+push constant 2
+add
+push this 4
+push constant 4
+call Math.multiply 2
+push constant 2
+add
+push constant 2
+call Screen.drawCircle 3
+pop temp 0
+push constant 0
+return
+function CobraGrid.initGrid 5
+push argument 0
+pop pointer 0
+push this 1
+call Array.new 1
+pop this 5
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push this 1
+lt
+not
+if-goto WHILE_END0
+push this 2
+call Array.new 1
+pop local 2
+push constant 0
+pop local 1
+label WHILE_EXP1
+push local 1
+push this 2
+lt
+not
+if-goto WHILE_END1
+push local 1
+push local 2
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP1
+label WHILE_END1
+push local 0
+push this 5
+add
+push local 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+pop local 3
+label WHILE_EXP2
+push local 3
+push constant 32
+lt
+not
+if-goto WHILE_END2
+push local 3
+push constant 4
+eq
+not
+push local 3
+push constant 12
+eq
+not
+and
+push local 3
+push constant 18
+eq
+not
+and
+push local 3
+push constant 26
+eq
+not
+and
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+push constant 2560
+push local 3
+add
+call CobraGrid.drawWall 2
+pop temp 0
+label IF_FALSE0
+push local 3
+push constant 1
+add
+pop local 3
+goto WHILE_EXP2
+label WHILE_END2
+push constant 0
+pop local 3
+label WHILE_EXP3
+push local 3
+push constant 2560
+lt
+not
+if-goto WHILE_END3
+push pointer 0
+push constant 9
+push local 3
+add
+call CobraGrid.drawWall 2
+pop temp 0
+push local 3
+push constant 512
+add
+pop local 3
+goto WHILE_EXP3
+label WHILE_END3
+push constant 512
+pop local 3
+label WHILE_EXP4
+push local 3
+push constant 2560
+lt
+not
+if-goto WHILE_END4
+push pointer 0
+push constant 15
+push local 3
+add
+call CobraGrid.drawWall 2
+pop temp 0
+push local 3
+push constant 512
+add
+pop local 3
+goto WHILE_EXP4
+label WHILE_END4
+push constant 0
+pop local 3
+label WHILE_EXP5
+push local 3
+push constant 2560
+lt
+not
+if-goto WHILE_END5
+push pointer 0
+push constant 21
+push local 3
+add
+call CobraGrid.drawWall 2
+pop temp 0
+push local 3
+push constant 512
+add
+pop local 3
+goto WHILE_EXP5
+label WHILE_END5
+push pointer 0
+push constant 1092
+call CobraGrid.draw608 2
+pop temp 0
+push pointer 0
+push constant 1100
+call CobraGrid.drawDragon 2
+pop temp 0
+push pointer 0
+push constant 1106
+call CobraGrid.drawTelephone 2
+pop temp 0
+push pointer 0
+push constant 1114
+call CobraGrid.draw602 2
+pop temp 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push constant 79
+push constant 150
+push constant 192
+push constant 190
+call Screen.drawRectangle 4
+pop temp 0
+push constant 303
+push constant 150
+push constant 416
+push constant 190
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push constant 80
+push constant 151
+push constant 191
+push constant 189
+call Screen.drawRectangle 4
+pop temp 0
+push constant 304
+push constant 151
+push constant 415
+push constant 189
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push constant 100
+push constant 150
+push constant 170
+push constant 190
+call Screen.drawRectangle 4
+pop temp 0
+push constant 325
+push constant 150
+push constant 396
+push constant 190
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push constant 105
+push constant 155
+push constant 165
+push constant 185
+call Screen.drawRectangle 4
+pop temp 0
+push constant 330
+push constant 155
+push constant 391
+push constant 185
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push constant 135
+push constant 170
+push constant 7
+call Screen.drawCircle 3
+pop temp 0
+push constant 363
+push constant 170
+push constant 7
+call Screen.drawCircle 3
+pop temp 0
+push pointer 0
+push constant 5125
+call CobraGrid.drawStudent 2
+pop temp 0
+push pointer 0
+push constant 5131
+call CobraGrid.drawStudent 2
+pop temp 0
+push pointer 0
+push constant 5139
+call CobraGrid.drawStudent 2
+pop temp 0
+push pointer 0
+push constant 5145
+call CobraGrid.drawStudent 2
+pop temp 0
+push constant 0
+push this 2
+push constant 45
+sub
+push this 1
+push constant 4
+call Math.multiply 2
+push constant 1
+sub
+push this 2
+push constant 45
+sub
+call Screen.drawLine 4
+pop temp 0
+push constant 0
+push this 2
+push constant 4
+call Math.multiply 2
+push constant 1
+add
+push this 1
+push constant 4
+call Math.multiply 2
+push constant 1
+sub
+push this 2
+push constant 4
+call Math.multiply 2
+push constant 1
+add
+call Screen.drawLine 4
+pop temp 0
+push constant 0
+push constant 0
+call Output.moveCursor 2
+pop temp 0
+push constant 17
+call String.new 1
+push constant 54
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 56
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+push constant 103
+call String.appendChar 2
+push constant 108
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+push constant 104
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 66
+call String.appendChar 2
+push constant 50
+call String.appendChar 2
+push constant 45
+call String.appendChar 2
+push constant 67
+call String.appendChar 2
+push constant 49
+call String.appendChar 2
+pop local 4
+push local 4
+call Output.printString 1
+pop temp 0
+push local 4
+call String.dispose 1
+pop temp 0
+push constant 0
+push constant 28
+call Output.moveCursor 2
+pop temp 0
+push constant 7
+call String.new 1
+push constant 68
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 78
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 89
+call String.appendChar 2
+pop local 4
+push local 4
+call Output.printString 1
+pop temp 0
+push local 4
+call String.dispose 1
+pop temp 0
+push constant 0
+push constant 46
+call Output.moveCursor 2
+pop temp 0
+push constant 17
+call String.new 1
+push constant 54
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 50
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+push constant 103
+call String.appendChar 2
+push constant 108
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+push constant 104
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 66
+call String.appendChar 2
+push constant 49
+call String.appendChar 2
+push constant 45
+call String.appendChar 2
+push constant 66
+call String.appendChar 2
+push constant 50
+call String.appendChar 2
+pop local 4
+push local 4
+call Output.printString 1
+pop temp 0
+push local 4
+call String.dispose 1
+pop temp 0
+push constant 0
+return
+function CobraGrid.drawStudent 1
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 2040
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 2052
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 2340
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 2052
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 2580
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 2532
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 1032
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 1008
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 288
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 3804
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 3276
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 2052
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 4578
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 2244
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 1032
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 1008
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function CobraGrid.drawWall 1
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 1
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 10923
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 21845
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 10923
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 21845
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 10923
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 21845
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 10923
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 21845
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 10923
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 21845
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 10923
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 21845
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 10923
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 21845
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 1
+neg
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function CobraGrid.drawDragon 1
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 4096
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 4096
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 12288
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 4048
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 12396
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 12504
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 12720
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 13152
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 12992
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 14328
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 16376
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 16380
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 16380
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 9366
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 9363
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 28082
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function CobraGrid.drawTelephone 1
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 24
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 24
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 16376
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 16376
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 12312
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 12312
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 12312
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 12312
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 16376
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 16376
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 15032
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 16376
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 15032
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 16376
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 15032
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 16376
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function CobraGrid.draw602 1
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 1984
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 6192
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 8200
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 16388
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 20500
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 26574
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 27566
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 25486
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 32766
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 32766
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 18468
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 18372
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 8200
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 6192
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 1984
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function CobraGrid.draw608 1
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+pop local 0
+push local 0
+push constant 0
+add
+push constant 1984
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 32
+add
+push constant 6192
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 64
+add
+push constant 8200
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 96
+add
+push constant 16388
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 128
+add
+push constant 21588
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 160
+add
+push constant 16646
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 192
+add
+push constant 25486
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 224
+add
+push constant 30686
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 256
+add
+push constant 32766
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 288
+add
+push constant 32766
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 320
+add
+push constant 18468
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 352
+add
+push constant 18372
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 384
+add
+push constant 8200
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 416
+add
+push constant 6192
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 448
+add
+push constant 1984
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 480
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function CobraGrid.sizeX 0
+push argument 0
+pop pointer 0
+push this 1
+return
+function CobraGrid.sizeY 0
+push argument 0
+pop pointer 0
+push this 2
+return
+function CobraGrid.pointX 0
+push argument 0
+pop pointer 0
+push this 3
+return
+function CobraGrid.pointY 0
+push argument 0
+pop pointer 0
+push this 4
+return
+function CobraGrid.setOccupied 1
+push argument 0
+pop pointer 0
+push argument 1
+push this 5
+add
+pop pointer 1
+push that 0
+pop local 0
+push argument 2
+push local 0
+add
+push argument 3
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+function CobraGrid.checkOccupied 1
+push argument 0
+pop pointer 0
+push argument 1
+push this 5
+add
+pop pointer 1
+push that 0
+pop local 0
+push argument 2
+push local 0
+add
+pop pointer 1
+push that 0
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+not
+return
+label IF_FALSE0
+push argument 2
+push constant 4
+lt
+push argument 2
+push constant 19
+gt
+push argument 2
+push constant 24
+lt
+and
+push argument 1
+push constant 15
+gt
+push argument 1
+push constant 21
+lt
+and
+not
+and
+push argument 1
+push constant 47
+gt
+push argument 1
+push constant 53
+lt
+and
+not
+and
+push argument 1
+push constant 71
+gt
+push argument 1
+push constant 77
+lt
+and
+not
+and
+push argument 1
+push constant 103
+gt
+push argument 1
+push constant 109
+lt
+and
+not
+and
+or
+push argument 2
+push constant 60
+gt
+or
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+not
+return
+label IF_FALSE1
+push argument 1
+push constant 35
+gt
+push argument 1
+push constant 40
+lt
+and
+push argument 1
+push constant 59
+gt
+push argument 1
+push constant 64
+lt
+and
+or
+push argument 1
+push constant 83
+gt
+push argument 1
+push constant 88
+lt
+and
+or
+push argument 2
+push constant 3
+gt
+push argument 2
+push constant 20
+lt
+and
+and
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 0
+not
+return
+label IF_FALSE2
+push argument 2
+push constant 7
+gt
+push argument 2
+push constant 12
+lt
+and
+push argument 1
+push constant 15
+gt
+push argument 1
+push constant 20
+lt
+and
+push argument 1
+push constant 47
+gt
+push argument 1
+push constant 52
+lt
+and
+or
+push argument 1
+push constant 71
+gt
+push argument 1
+push constant 76
+lt
+and
+or
+push argument 1
+push constant 103
+gt
+push argument 1
+push constant 108
+lt
+and
+or
+and
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 0
+not
+return
+label IF_FALSE3
+push argument 2
+push constant 36
+gt
+push argument 2
+push constant 48
+lt
+and
+push argument 1
+push constant 19
+gt
+push argument 1
+push constant 48
+lt
+and
+push argument 1
+push constant 75
+gt
+push argument 1
+push constant 104
+lt
+and
+or
+and
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 0
+not
+return
+label IF_FALSE4
+push constant 0
+return
+function CobraGrid.checkPoint 0
+push argument 0
+pop pointer 0
+push argument 1
+push this 3
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push argument 2
+push this 4
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+not
+return
+label IF_FALSE1
+label IF_FALSE0
+push constant 0
+return
+function CobraGrid.drawCobraBit 0
+push argument 0
+pop pointer 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push argument 1
+push constant 4
+call Math.multiply 2
+push argument 2
+push constant 4
+call Math.multiply 2
+push argument 1
+push constant 4
+call Math.multiply 2
+push constant 4
+add
+push argument 2
+push constant 4
+call Math.multiply 2
+push constant 4
+add
+call Screen.drawRectangle 4
+pop temp 0
+push pointer 0
+push argument 1
+push argument 2
+push constant 0
+not
+call CobraGrid.setOccupied 4
+pop temp 0
+push constant 0
+return
+function CobraGrid.clearCobraBit 0
+push argument 0
+pop pointer 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push argument 1
+push constant 4
+call Math.multiply 2
+push argument 2
+push constant 4
+call Math.multiply 2
+push argument 1
+push constant 4
+call Math.multiply 2
+push constant 4
+add
+push argument 2
+push constant 4
+call Math.multiply 2
+push constant 4
+add
+call Screen.drawRectangle 4
+pop temp 0
+push pointer 0
+push argument 1
+push argument 2
+push constant 0
+call CobraGrid.setOccupied 4
+pop temp 0
+push constant 0
+return
+function CobraGrid.drawStatus 2
+push argument 0
+pop pointer 0
+push constant 22
+push constant 0
+call Output.moveCursor 2
+pop temp 0
+push constant 7
+call String.new 1
+push constant 77
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 116
+call String.appendChar 2
+push constant 109
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 99
+call String.appendChar 2
+push constant 104
+call String.appendChar 2
+pop local 1
+push local 1
+call Output.printString 1
+pop temp 0
+push local 1
+call String.dispose 1
+pop temp 0
+push constant 22
+push constant 22
+call Output.moveCursor 2
+pop temp 0
+push constant 12
+call String.new 1
+push constant 80
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 112
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+push constant 116
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+pop local 1
+push local 1
+call Output.printString 1
+pop temp 0
+push local 1
+call String.dispose 1
+pop temp 0
+push this 0
+call CobraGame.getScore 1
+call Output.printInt 1
+pop temp 0
+push constant 22
+push constant 52
+call Output.moveCursor 2
+pop temp 0
+push constant 8
+call String.new 1
+push constant 76
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+push constant 103
+call String.appendChar 2
+push constant 116
+call String.appendChar 2
+push constant 104
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+pop local 1
+push local 1
+call Output.printString 1
+pop temp 0
+push local 1
+call String.dispose 1
+pop temp 0
+push this 0
+call CobraGame.getCobra 1
+pop local 0
+push local 0
+call Cobra.getLength 1
+call Output.printInt 1
+pop temp 0
+push constant 0
+return
+function CobraGrid.drawDone 1
+push argument 0
+pop pointer 0
+push constant 22
+push constant 39
+call Output.moveCursor 2
+pop temp 0
+push constant 9
+call String.new 1
+push constant 32
+call String.appendChar 2
+push constant 91
+call String.appendChar 2
+push constant 68
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 78
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 93
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+pop local 0
+push local 0
+call Output.printString 1
+pop temp 0
+push local 0
+call String.dispose 1
+pop temp 0
+push constant 0
+return
+function CobraGrid.drawCrashed 1
+push argument 0
+pop pointer 0
+push constant 22
+push constant 39
+call Output.moveCursor 2
+pop temp 0
+push constant 9
+call String.new 1
+push constant 42
+call String.appendChar 2
+push constant 67
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 72
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 68
+call String.appendChar 2
+push constant 42
+call String.appendChar 2
+pop local 0
+push local 0
+call Output.printString 1
+pop temp 0
+push local 0
+call String.dispose 1
+pop temp 0
+push constant 0
+return
