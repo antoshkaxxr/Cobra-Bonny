@@ -53,7 +53,6 @@ class CobraGrid {
             if (~checkOccupied(randX, randY)) {
                 let found = true;
             }
-
         }
         let pointX = randX;
         let pointY = randY;
@@ -71,8 +70,8 @@ class CobraGrid {
     method void initGrid() {
         var int curX, curY;
         var Array xGrid;
-		var int j;
-		var String tString;
+	var int j;
+	var String tString;
 
         let grid = Array.new(sizeX);
         let curX = 0;
@@ -88,88 +87,88 @@ class CobraGrid {
             let curX = curX + 1;
         }
 		
-		// drawing walls that reflect the outlines of audiences
-		let j = 0;
-		while (j < 32)
+	// drawing walls that reflect the outlines of audiences
+	let j = 0;
+	while (j < 32)
+	{
+		if ((~(j = 4)) & (~(j = 12)) & (~(j = 18)) & (~(j = 26)))
 		{
-			if ((~(j = 4)) & (~(j = 12)) & (~(j = 18)) & (~(j = 26)))
-			{
-				do drawWall(2560 + j);
-			}
-			let j = j + 1;
+			do drawWall(2560 + j);
 		}
+		let j = j + 1;
+	}
 		
-		let j = 0;
-		while (j < 2560)
-		{
-			do drawWall(9 + j);
-			let j = j + 512;
-		}
+	let j = 0;
+	while (j < 2560)
+	{
+		do drawWall(9 + j);
+		let j = j + 512;
+	}
+
+	let j = 512;
+	while (j < 2560)
+	{
+		do drawWall(15 + j);
+		let j = j + 512;
+	}
 		
-		let j = 512;
-		while (j < 2560)
-		{
-			do drawWall(15 + j);
-			let j = j + 512;
-		}
+	let j = 0;
+	while (j < 2560)
+	{
+		do drawWall(21 + j);
+		let j = j + 512;
+	}
 		
-		let j = 0;
-		while (j < 2560)
-		{
-			do drawWall(21 + j);
-			let j = j + 512;
-		}
-		
-		// drawing the attributes in audiences
-		do draw608(1092);
-		do drawDragon(1100);
-		do drawTelephone(1106);
-		do draw602(1114);
+	// drawing the attributes in audiences
+	do draw608(1092);
+	do drawDragon(1100);
+	do drawTelephone(1106);
+	do draw602(1114);
 		
         // drawing two tennis tables
-		do Screen.setColor(true);
-		do Screen.drawRectangle(79, 150, 192, 190);
-		do Screen.drawRectangle(303, 150, 416, 190);
-		do Screen.setColor(false);
-		do Screen.drawRectangle(80, 151, 191, 189);
-		do Screen.drawRectangle(304, 151, 415, 189);
+	do Screen.setColor(true);
+	do Screen.drawRectangle(79, 150, 192, 190);
+	do Screen.drawRectangle(303, 150, 416, 190);
+	do Screen.setColor(false);
+	do Screen.drawRectangle(80, 151, 191, 189);
+	do Screen.drawRectangle(304, 151, 415, 189);
         do Screen.setColor(true);
-		do Screen.drawRectangle(100, 150, 170, 190);
-		do Screen.drawRectangle(325, 150, 396, 190);
+	do Screen.drawRectangle(100, 150, 170, 190);
+	do Screen.drawRectangle(325, 150, 396, 190);
         do Screen.setColor(false);
-		do Screen.drawRectangle(105, 155, 165, 185);
-		do Screen.drawRectangle(330, 155, 391, 185);
-		do Screen.setColor(true);
-		do Screen.drawCircle(135, 170, 7);
-		do Screen.drawCircle(363, 170, 7);
+	do Screen.drawRectangle(105, 155, 165, 185);
+	do Screen.drawRectangle(330, 155, 391, 185);
+	do Screen.setColor(true);
+	do Screen.drawCircle(135, 170, 7);
+	do Screen.drawCircle(363, 170, 7);
 		
-		// drawing four students playing table tennis
-		do drawStudent(5125);
-		do drawStudent(5131);
-		do drawStudent(5139);
-		do drawStudent(5145);
-		
-		// drawing the horizontal line dividing the game field from the status bar
-		do Screen.drawLine(0, sizeY - 45, sizeX * 4 - 1, sizeY - 45);
-		do Screen.drawLine(0, (sizeY*4)+1, (sizeX*4-1), (sizeY*4)+1);
+	// drawing four students playing table tennis
+	do drawStudent(5125);
+	do drawStudent(5131);
+	do drawStudent(5139);
+	do drawStudent(5145);
+
+	// drawing the horizontal line dividing the game field from the status bar
+	do Screen.drawLine(0, sizeY - 45, sizeX * 4 - 1, sizeY - 45);
+	do Screen.drawLine(0, (sizeY*4)+1, (sizeX*4-1), (sizeY*4)+1);
         
-		// audience names
-		do Output.moveCursor(0, 0);
+	// audience names
+	do Output.moveCursor(0, 0);
         let tString = "608 English B2-C1";
         do Output.printString(tString);
         do tString.dispose();
 		
-		do Output.moveCursor(0, 28);
+	do Output.moveCursor(0, 28);
         let tString = "DEANERY";
         do Output.printString(tString);
         do tString.dispose();
 		
-		do Output.moveCursor(0, 46);
+	do Output.moveCursor(0, 46);
         let tString = "602 English B1-B2";
         do Output.printString(tString);
         do tString.dispose();
 		
-		return;
+	return;
     }
 
 	method void drawStudent(int location) {
@@ -334,37 +333,37 @@ class CobraGrid {
             return true;
         }
 		
-		// walls
-		if ((y < 4) | ((y > 19) & (y < 24) & (~((x > 15) & (x < 21))) 
-			& (~((x > 47) & (x < 53))) 
-			& (~((x > 71) & (x < 77)))
-			& (~((x > 103) & (x < 109)))) | (y > 60)) {
-			return true;
-		}
-		if (((((x > 35) & (x < 40)) 
-		| ((x > 59) & (x < 64)) 
-		| ((x > 83) & (x < 88))) 
-		& ((y > 3) & (y < 20)))) {
-			return true;
-		}
-		
-		// attributes in audiences
-		if (((y > 7) & (y < 12))
-		& (((x > 15) & (x < 20))
-		| ((x > 47) & (x < 52))
-		| ((x > 71) & (x < 76))
-		| ((x > 103) & (x < 108)))) {
-			return true;
-		}
-		
-		// tennis tables
-		if (((y > 36) & (y < 48))
-		& (((x > 19) & (x < 48))
-		| ((x > 75) & (x < 104)))) {
-			return true;
-		}
-		
-		return false;
+	// walls
+	if ((y < 4) | ((y > 19) & (y < 24) & (~((x > 15) & (x < 21))) 
+		& (~((x > 47) & (x < 53))) 
+		& (~((x > 71) & (x < 77)))
+		& (~((x > 103) & (x < 109)))) | (y > 60)) {
+		return true;
+	}
+	if (((((x > 35) & (x < 40)) 
+	| ((x > 59) & (x < 64)) 
+	| ((x > 83) & (x < 88))) 
+	& ((y > 3) & (y < 20)))) {
+		return true;
+	}
+
+	// attributes in audiences
+	if (((y > 7) & (y < 12))
+	& (((x > 15) & (x < 20))
+	| ((x > 47) & (x < 52))
+	| ((x > 71) & (x < 76))
+	| ((x > 103) & (x < 108)))) {
+		return true;
+	}
+
+	// tennis tables
+	if (((y > 36) & (y < 48))
+	& (((x > 19) & (x < 48))
+	| ((x > 75) & (x < 104)))) {
+		return true;
+	}
+
+	return false;
     }
 	
     method boolean checkPoint(int x, int y) {
