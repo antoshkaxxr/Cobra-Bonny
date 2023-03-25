@@ -60,7 +60,7 @@ class CobraGame {
             // normal unpaused loop
             let key = Keyboard.keyPressed();
 
-            if (key = 130) {
+            if (key = 65) {
                 // left arrow, valid only if we were going up or down
                 if (cobra.getLastDir() = 1) {
                     do cobra.setDir(3);
@@ -70,7 +70,7 @@ class CobraGame {
                 }
             }
 			
-            if (key = 131) {
+            if (key = 87) {
                 // up arrow, valid only if we were going left or right
                 if (cobra.getLastDir() = 3) {
                     do cobra.setDir(1);
@@ -80,7 +80,7 @@ class CobraGame {
                 }
             }
 			
-            if (key = 132) {
+            if (key = 68) {
                 // right arrow, valid only if we were going up or down
                 if (cobra.getLastDir() = 1) {
                     do cobra.setDir(4);
@@ -90,7 +90,7 @@ class CobraGame {
                 }
             }
 			
-            if (key = 133) {
+            if (key = 83) {
                 // down arrow, valid only if we were going left or right
                 if (cobra.getLastDir() = 3) {
                     do cobra.setDir(2);
