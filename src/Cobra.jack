@@ -1,0 +1,322 @@
+class Cobra {
+
+    // the game the cobra is playing in
+    field CobraGame game;
+
+    // the XY position of the cobra's head
+    field int posX, posY;
+
+    // the length of the cobra
+    field int length;
+
+    // how much the cobra grows by when it eats a pellet
+    field int growby;
+
+    // how much the cobra has left to grow
+    field int togrow;
+
+    // the direction the cobra is/was moving
+    // 0 = none, 1 = up, 2 = down, 3 = left, 4 = right
+    field int dir, lastdir;
+
+    // the history of the cobra's movements
+    field Array histX, histY;
+    field int histSize;
+
+    // creates a new cobra
+    // args are X/Y position of head, length and how much to grow by
+    constructor Cobra new(CobraGame Agame, int Ax, int Ay, int Alen, int Agrowby) {
+        var int i;
+
+        let game = Agame;
+        let posX = Ax - Alen;
+        let posY = Ay;
+        let length = Alen;
+        let growby = Agrowby;
+
+        let togrow = 0;
+		// Cobra is oriented in the right direction at first
+        let dir = 4;
+        let lastdir = 4;
+        let histSize = 512;
+        let histX = Array.new(histSize);
+        let histY = Array.new(histSize);
+
+        // draw the initial cobra
+        let i = 0;
+        while( i < length ) {
+            let posX = posX + 1;
+            do drawHead(game.getCycle());
+            let i = i + 1;
+            do game.nextCycle();
+        }
+        return this;
+    }
+
+    // disposes of a cobra
+    method void dispose() {
+        do histX.dispose();
+        do histY.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    // checks if the cobra's history needs to be rewritten
+    method boolean checkRewriteHistory() {
+        if (game.getCycle() = histSize) {
+            do rewriteHistory();
+            return true;
+        }
+        return false;
+    }
+
+    // rewrites the cobra's history
+    method void rewriteHistory() {
+        var int i, src, dst;
+
+        let i = length;
+        let dst = 0;
+        let src = histSize - length;
+        while( i > 0 ) {
+            let histX[dst] = histX[src];
+            let histY[dst] = histY[src];
+            let src = src + 1;
+            let dst = dst + 1;
+            let i = i - 1;
+        }
+        return;
+    }
+
+    // gets the cobra's head position
+    method int posX() {
+        return posX;
+    }
+	
+    method int posY() {
+        return posY;
+    }
+
+    // gets the cobra's length
+    method int getLength() {
+        return length;
+    }
+
+    // gets the cobra's direction
+    method int getDir() {
+        return dir;
+    }
+
+    // gets the cobra's last direction
+    method int getLastDir() {
+        return lastdir;
+    }
+
+    // sets the cobra's direction
+    method void setDir(int newdir) {
+        let dir = newdir;
+        return;
+    }
+
+    // copies dir to lastdir
+    method void rememberDir() {
+        let lastdir = dir;
+        return;
+    }
+
+    // method checks if we can move one more space in the current direction
+    method boolean tryMove() {
+
+        var CobraGrid grid;
+        let grid = game.getGrid();
+
+		// up
+        if (dir = 1) {
+			// walls
+			if ((posY = 24) & (~((posX > 15) & (posX < 20))) 
+			& (~((posX > 47) & (posX < 52))) 
+			& (~((posX > 71) & (posX < 76)))
+			& (~((posX > 103) & (posX < 108)))) {
+				return false;
+			}
+			
+			// attributes in audiences
+			if ((((posX > 15) & (posX < 20)) 
+			| ((posX > 47) & (posX < 52)) 
+			| ((posX > 71) & (posX < 76)) 
+			| ((posX > 103) & (posX < 108))) 
+			& (posY = 13)) {
+				return false;
+			}
+			
+			// tennis tables
+			if ((posY = 47)
+			& (((posX > 19) & (posX < 48))
+			| (posX > 75) & (posX < 104))) {
+				return false;
+			}
+			
+			// the upper edge of the field
+            if( posY = 4 ) {
+                return false;
+            }
+            else {
+                let posY = posY - 1;
+            }
+        }
+		
+		// down
+        if (dir = 2) {
+			// walls
+			if ((posY = 19) & (~((posX > 15) & (posX < 20))) 
+			& (~((posX > 47) & (posX < 52))) 
+			& (~((posX > 71) & (posX < 76)))
+			& (~((posX > 103) & (posX < 108)))) {
+				return false;
+			}
+			
+			// attributes in audiences
+			if ((((posX > 15) & (posX < 20)) 
+			| ((posX > 47) & (posX < 52)) 
+			| ((posX > 71) & (posX < 76)) 
+			| ((posX > 103) & (posX < 108))) 
+			& (posY = 8)) {
+				return false;
+			}
+			
+			// tennis tables
+			if ((posY = 37)
+			& (((posX > 19) & (posX < 48))
+			| (posX > 75) & (posX < 104))) {
+				return false;
+			}
+			
+			// the bottom edge of the field
+            if( posY = grid.sizeY() ) {
+                return false;
+            }
+            else {
+                let posY = posY + 1;
+            }
+        }
+        
+		// left
+		if (dir = 3) {
+            // walls
+			if (((posX = 40) | (posX = 64) | (posX = 88)) 
+			& ((posY > 3) & (posY < 20))) {
+				return false;
+			}
+			if (((posX = 16) | (posX = 48) | (posX = 72) | (posX = 104)) 
+			& ((posY > 20) & (posY < 23))) {
+				return false;
+			}
+			
+			// attributes in audiences
+			if (((posX = 20) | (posX = 52) | (posX = 76) | (posX = 107)) 
+			& ((posY > 8) & (posY < 13))) {
+				return false;
+			}
+			
+			// tennis tables
+			if (((posX = 48) | (posX = 104))
+			& ((posY > 36) & (posY < 48)))
+			{
+				return false;
+			}
+			
+			// the left edge of the field
+            if( posX = 0 ) {
+                return false;
+            }
+            else {
+                let posX = posX - 1;
+            }
+        }
+		
+		// right
+        if (dir = 4) {
+            // walls
+			if (((posX = 35) | (posX = 59) | (posX = 83)) 
+			& ((posY > 3) & (posY < 20))) {
+				return false;
+			}
+			if (((posX = 19) | (posX = 51) | (posX = 75) | (posX = 107)) 
+			& ((posY > 20) & (posY < 23))) {
+				return false;
+			}
+			
+			// attributes in audiences
+			if (((posX = 15) | (posX = 47) | (posX = 71) | (posX = 103)) 
+			& ((posY > 8) & (posY < 13))) {
+				return false;
+			}
+			
+			// tennis tables
+			if (((posX = 19) | (posX = 75))
+			& ((posY > 36) & (posY < 48)))
+			{
+				return false;
+			}
+			
+			// the right edge of the field
+            if( posX = grid.sizeX() ) {
+                return false;
+            }
+            else {
+                let posX = posX + 1;
+            }
+        }
+
+        // check if the cobra has hit itself
+        if (grid.checkOccupied(posX, posY)) {
+            return false;
+        }
+        return true;
+    }
+
+    // makes the cobra grow
+    method void grow(int cycle) {
+        // draw the new head
+        do drawHead(cycle);
+
+        // does the cobra have some growing to do?
+        if( togrow > 0 ) {
+            let togrow = togrow - 1;
+            let length = length + 1;
+        }
+        // otherwise clear the old tail
+        else {
+            do clearTail(cycle);
+        }
+        return;
+    }
+
+    // draws the current head of the cobra
+    method void drawHead(int cycle) {
+        var CobraGrid grid;
+        let grid = game.getGrid();
+        do grid.drawCobraBit(posX, posY);
+        let histX[cycle] = posX;
+        let histY[cycle] = posY;
+        return;
+    }
+
+    // clears the current tail of the cobra
+    method void clearTail(int cycle) {
+        var CobraGrid grid;
+        var int tailIndex, tailX, tailY;
+
+        let tailIndex = cycle - length;
+        let tailX = histX[tailIndex];
+        let tailY = histY[tailIndex];
+        let grid = game.getGrid();
+        do grid.clearCobraBit(tailX, tailY);
+        return;
+    }
+
+    // the cobra "eats" a PRS point
+    method void eatPoint() {
+        let togrow = togrow + growby;
+        return;
+    }
+}
