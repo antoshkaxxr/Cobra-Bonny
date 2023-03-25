@@ -4,7 +4,7 @@ class Main {
         var CobraGame game;
         let game = CobraGame.new();
         do game.run();
-	    do game.dispose();
+	do game.dispose();
         return;
     }
 
