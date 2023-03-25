@@ -1,0 +1,823 @@
+function Cobra.new 1
+push constant 11
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push argument 1
+push argument 3
+sub
+pop this 1
+push argument 2
+pop this 2
+push argument 3
+pop this 3
+push argument 4
+pop this 4
+push constant 0
+pop this 5
+push constant 4
+pop this 6
+push constant 4
+pop this 7
+push constant 512
+pop this 10
+push this 10
+call Array.new 1
+pop this 8
+push this 10
+call Array.new 1
+pop this 9
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push this 3
+lt
+not
+if-goto WHILE_END0
+push this 1
+push constant 1
+add
+pop this 1
+push pointer 0
+push this 0
+call CobraGame.getCycle 1
+call Cobra.drawHead 2
+pop temp 0
+push local 0
+push constant 1
+add
+pop local 0
+push this 0
+call CobraGame.nextCycle 1
+pop temp 0
+goto WHILE_EXP0
+label WHILE_END0
+push pointer 0
+return
+function Cobra.dispose 0
+push argument 0
+pop pointer 0
+push this 8
+call Array.dispose 1
+pop temp 0
+push this 9
+call Array.dispose 1
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function Cobra.checkRewriteHistory 0
+push argument 0
+pop pointer 0
+push this 0
+call CobraGame.getCycle 1
+push this 10
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+call Cobra.rewriteHistory 1
+pop temp 0
+push constant 0
+not
+return
+label IF_FALSE0
+push constant 0
+return
+function Cobra.rewriteHistory 3
+push argument 0
+pop pointer 0
+push this 3
+pop local 0
+push constant 0
+pop local 2
+push this 10
+push this 3
+sub
+pop local 1
+label WHILE_EXP0
+push local 0
+push constant 0
+gt
+not
+if-goto WHILE_END0
+push local 2
+push this 8
+add
+push local 1
+push this 8
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 2
+push this 9
+add
+push local 1
+push this 9
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 1
+push constant 1
+add
+pop local 1
+push local 2
+push constant 1
+add
+pop local 2
+push local 0
+push constant 1
+sub
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function Cobra.posX 0
+push argument 0
+pop pointer 0
+push this 1
+return
+function Cobra.posY 0
+push argument 0
+pop pointer 0
+push this 2
+return
+function Cobra.getLength 0
+push argument 0
+pop pointer 0
+push this 3
+return
+function Cobra.getDir 0
+push argument 0
+pop pointer 0
+push this 6
+return
+function Cobra.getLastDir 0
+push argument 0
+pop pointer 0
+push this 7
+return
+function Cobra.setDir 0
+push argument 0
+pop pointer 0
+push argument 1
+pop this 6
+push constant 0
+return
+function Cobra.rememberDir 0
+push argument 0
+pop pointer 0
+push this 6
+pop this 7
+push constant 0
+return
+function Cobra.tryMove 1
+push argument 0
+pop pointer 0
+push this 0
+call CobraGame.getGrid 1
+pop local 0
+push this 6
+push constant 1
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 2
+push constant 24
+eq
+push this 1
+push constant 15
+gt
+push this 1
+push constant 20
+lt
+and
+not
+and
+push this 1
+push constant 47
+gt
+push this 1
+push constant 52
+lt
+and
+not
+and
+push this 1
+push constant 71
+gt
+push this 1
+push constant 76
+lt
+and
+not
+and
+push this 1
+push constant 103
+gt
+push this 1
+push constant 108
+lt
+and
+not
+and
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+return
+label IF_FALSE1
+push this 1
+push constant 15
+gt
+push this 1
+push constant 20
+lt
+and
+push this 1
+push constant 47
+gt
+push this 1
+push constant 52
+lt
+and
+or
+push this 1
+push constant 71
+gt
+push this 1
+push constant 76
+lt
+and
+or
+push this 1
+push constant 103
+gt
+push this 1
+push constant 108
+lt
+and
+or
+push this 2
+push constant 13
+eq
+and
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 0
+return
+label IF_FALSE2
+push this 2
+push constant 47
+eq
+push this 1
+push constant 19
+gt
+push this 1
+push constant 48
+lt
+and
+push this 1
+push constant 75
+gt
+or
+push this 1
+push constant 104
+lt
+and
+and
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 0
+return
+label IF_FALSE3
+push this 2
+push constant 4
+eq
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 0
+return
+goto IF_END4
+label IF_FALSE4
+push this 2
+push constant 1
+sub
+pop this 2
+label IF_END4
+label IF_FALSE0
+push this 6
+push constant 2
+eq
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push this 2
+push constant 19
+eq
+push this 1
+push constant 15
+gt
+push this 1
+push constant 20
+lt
+and
+not
+and
+push this 1
+push constant 47
+gt
+push this 1
+push constant 52
+lt
+and
+not
+and
+push this 1
+push constant 71
+gt
+push this 1
+push constant 76
+lt
+and
+not
+and
+push this 1
+push constant 103
+gt
+push this 1
+push constant 108
+lt
+and
+not
+and
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push constant 0
+return
+label IF_FALSE6
+push this 1
+push constant 15
+gt
+push this 1
+push constant 20
+lt
+and
+push this 1
+push constant 47
+gt
+push this 1
+push constant 52
+lt
+and
+or
+push this 1
+push constant 71
+gt
+push this 1
+push constant 76
+lt
+and
+or
+push this 1
+push constant 103
+gt
+push this 1
+push constant 108
+lt
+and
+or
+push this 2
+push constant 8
+eq
+and
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push constant 0
+return
+label IF_FALSE7
+push this 2
+push constant 37
+eq
+push this 1
+push constant 19
+gt
+push this 1
+push constant 48
+lt
+and
+push this 1
+push constant 75
+gt
+or
+push this 1
+push constant 104
+lt
+and
+and
+if-goto IF_TRUE8
+goto IF_FALSE8
+label IF_TRUE8
+push constant 0
+return
+label IF_FALSE8
+push this 2
+push local 0
+call CobraGrid.sizeY 1
+eq
+if-goto IF_TRUE9
+goto IF_FALSE9
+label IF_TRUE9
+push constant 0
+return
+goto IF_END9
+label IF_FALSE9
+push this 2
+push constant 1
+add
+pop this 2
+label IF_END9
+label IF_FALSE5
+push this 6
+push constant 3
+eq
+if-goto IF_TRUE10
+goto IF_FALSE10
+label IF_TRUE10
+push this 1
+push constant 40
+eq
+push this 1
+push constant 64
+eq
+or
+push this 1
+push constant 88
+eq
+or
+push this 2
+push constant 3
+gt
+push this 2
+push constant 20
+lt
+and
+and
+if-goto IF_TRUE11
+goto IF_FALSE11
+label IF_TRUE11
+push constant 0
+return
+label IF_FALSE11
+push this 1
+push constant 16
+eq
+push this 1
+push constant 48
+eq
+or
+push this 1
+push constant 72
+eq
+or
+push this 1
+push constant 104
+eq
+or
+push this 2
+push constant 20
+gt
+push this 2
+push constant 23
+lt
+and
+and
+if-goto IF_TRUE12
+goto IF_FALSE12
+label IF_TRUE12
+push constant 0
+return
+label IF_FALSE12
+push this 1
+push constant 20
+eq
+push this 1
+push constant 52
+eq
+or
+push this 1
+push constant 76
+eq
+or
+push this 1
+push constant 107
+eq
+or
+push this 2
+push constant 8
+gt
+push this 2
+push constant 13
+lt
+and
+and
+if-goto IF_TRUE13
+goto IF_FALSE13
+label IF_TRUE13
+push constant 0
+return
+label IF_FALSE13
+push this 1
+push constant 48
+eq
+push this 1
+push constant 104
+eq
+or
+push this 2
+push constant 36
+gt
+push this 2
+push constant 48
+lt
+and
+and
+if-goto IF_TRUE14
+goto IF_FALSE14
+label IF_TRUE14
+push constant 0
+return
+label IF_FALSE14
+push this 1
+push constant 0
+eq
+if-goto IF_TRUE15
+goto IF_FALSE15
+label IF_TRUE15
+push constant 0
+return
+goto IF_END15
+label IF_FALSE15
+push this 1
+push constant 1
+sub
+pop this 1
+label IF_END15
+label IF_FALSE10
+push this 6
+push constant 4
+eq
+if-goto IF_TRUE16
+goto IF_FALSE16
+label IF_TRUE16
+push this 1
+push constant 35
+eq
+push this 1
+push constant 59
+eq
+or
+push this 1
+push constant 83
+eq
+or
+push this 2
+push constant 3
+gt
+push this 2
+push constant 20
+lt
+and
+and
+if-goto IF_TRUE17
+goto IF_FALSE17
+label IF_TRUE17
+push constant 0
+return
+label IF_FALSE17
+push this 1
+push constant 19
+eq
+push this 1
+push constant 51
+eq
+or
+push this 1
+push constant 75
+eq
+or
+push this 1
+push constant 107
+eq
+or
+push this 2
+push constant 20
+gt
+push this 2
+push constant 23
+lt
+and
+and
+if-goto IF_TRUE18
+goto IF_FALSE18
+label IF_TRUE18
+push constant 0
+return
+label IF_FALSE18
+push this 1
+push constant 15
+eq
+push this 1
+push constant 47
+eq
+or
+push this 1
+push constant 71
+eq
+or
+push this 1
+push constant 103
+eq
+or
+push this 2
+push constant 8
+gt
+push this 2
+push constant 13
+lt
+and
+and
+if-goto IF_TRUE19
+goto IF_FALSE19
+label IF_TRUE19
+push constant 0
+return
+label IF_FALSE19
+push this 1
+push constant 19
+eq
+push this 1
+push constant 75
+eq
+or
+push this 2
+push constant 36
+gt
+push this 2
+push constant 48
+lt
+and
+and
+if-goto IF_TRUE20
+goto IF_FALSE20
+label IF_TRUE20
+push constant 0
+return
+label IF_FALSE20
+push this 1
+push local 0
+call CobraGrid.sizeX 1
+eq
+if-goto IF_TRUE21
+goto IF_FALSE21
+label IF_TRUE21
+push constant 0
+return
+goto IF_END21
+label IF_FALSE21
+push this 1
+push constant 1
+add
+pop this 1
+label IF_END21
+label IF_FALSE16
+push local 0
+push this 1
+push this 2
+call CobraGrid.checkOccupied 3
+if-goto IF_TRUE22
+goto IF_FALSE22
+label IF_TRUE22
+push constant 0
+return
+label IF_FALSE22
+push constant 0
+not
+return
+function Cobra.grow 0
+push argument 0
+pop pointer 0
+push pointer 0
+push argument 1
+call Cobra.drawHead 2
+pop temp 0
+push this 5
+push constant 0
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 5
+push constant 1
+sub
+pop this 5
+push this 3
+push constant 1
+add
+pop this 3
+goto IF_END0
+label IF_FALSE0
+push pointer 0
+push argument 1
+call Cobra.clearTail 2
+pop temp 0
+label IF_END0
+push constant 0
+return
+function Cobra.drawHead 1
+push argument 0
+pop pointer 0
+push this 0
+call CobraGame.getGrid 1
+pop local 0
+push local 0
+push this 1
+push this 2
+call CobraGrid.drawCobraBit 3
+pop temp 0
+push argument 1
+push this 8
+add
+push this 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push argument 1
+push this 9
+add
+push this 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+function Cobra.clearTail 4
+push argument 0
+pop pointer 0
+push argument 1
+push this 3
+sub
+pop local 1
+push local 1
+push this 8
+add
+pop pointer 1
+push that 0
+pop local 2
+push local 1
+push this 9
+add
+pop pointer 1
+push that 0
+pop local 3
+push this 0
+call CobraGame.getGrid 1
+pop local 0
+push local 0
+push local 2
+push local 3
+call CobraGrid.clearCobraBit 3
+pop temp 0
+push constant 0
+return
+function Cobra.eatPoint 0
+push argument 0
+pop pointer 0
+push this 5
+push this 4
+add
+pop this 5
+push constant 0
+return
