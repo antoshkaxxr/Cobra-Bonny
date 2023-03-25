@@ -67,7 +67,7 @@ pop temp 0
 call Keyboard.keyPressed 0
 pop local 2
 push local 2
-push constant 130
+push constant 65
 eq
 if-goto IF_TRUE0
 goto IF_FALSE0
@@ -98,7 +98,7 @@ pop temp 0
 label IF_FALSE2
 label IF_FALSE0
 push local 2
-push constant 131
+push constant 87
 eq
 if-goto IF_TRUE3
 goto IF_FALSE3
@@ -129,7 +129,7 @@ pop temp 0
 label IF_FALSE5
 label IF_FALSE3
 push local 2
-push constant 132
+push constant 68
 eq
 if-goto IF_TRUE6
 goto IF_FALSE6
@@ -160,7 +160,7 @@ pop temp 0
 label IF_FALSE8
 label IF_FALSE6
 push local 2
-push constant 133
+push constant 83
 eq
 if-goto IF_TRUE9
 goto IF_FALSE9
