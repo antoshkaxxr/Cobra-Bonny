@@ -20,6 +20,7 @@
 Сможете ли Вы помочь Бонни в этом непростом деле? На кону - 100 баллов БРС!
 
 Авторы:
+
 <a href="https://github.com/antoshkaxxr" target="_blank">Габов Антон</a>
 
 <a href="https://github.com/IlyaTucha" target="_blank">Атучин Илья</a>
