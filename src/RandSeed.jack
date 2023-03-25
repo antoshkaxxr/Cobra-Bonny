@@ -6,20 +6,20 @@ class RandSeed {
         let seed = 0;
         let key = 0;
 		
-		// start of the game
-		do Output.moveCursor(5, 7);
+	// start of the game
+	do Output.moveCursor(5, 7);
         do Output.printString("Little cobra Bonny is a frequent guest on Matmech.");
-		do Output.moveCursor(9, 5);
-		do Output.printString("Recently, it promised students to help earn PRS points!");
-		do Output.moveCursor(13, 12);
-		do Output.printString("Will you help in this difficult matter?)");
-		do Output.moveCursor(17, 9);
-		do Output.printString("***Please, press any key, if you are ready!***");
+	do Output.moveCursor(9, 5);
+	do Output.printString("Recently, it promised students to help earn PRS points!");
+	do Output.moveCursor(13, 12);
+	do Output.printString("Will you help in this difficult matter?)");
+	do Output.moveCursor(17, 9);
+	do Output.printString("***Please, press any key, if you are ready!***");
 		
         do Output.println();
 
-		// unless the user presses key, we can't position the first point
-        while(~key) {
+	// unless the user presses key, we can't position the first point
+        while (~key) {
             let seed = seed + 1;
             if( seed = 32767 ) {
                 let seed = 0;
@@ -30,7 +30,5 @@ class RandSeed {
         do Screen.clearScreen();
 
         return seed;
-
     }
-
 }
