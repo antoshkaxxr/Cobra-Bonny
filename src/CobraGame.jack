@@ -18,7 +18,7 @@ class CobraGame {
     constructor CobraGame new() {
 
         // use the delay in the user pressing a key to position the first PRS point
-        do Random.setSeed(RandSeed.getSeed());
+        do Random.setSeed(StartScreen.getSeed());
 
         // init game vars
         let score = 0;
@@ -129,7 +129,7 @@ class CobraGame {
             do nextCycle();
 
             // check if the cobra's history needs to be rewritten
-            if (cobra.checkRewriteHistory()) {
+            if (cobra.rewriteHistory()) {
                 let cycle = cobra.getLength();
             }
 
@@ -142,7 +142,7 @@ class CobraGame {
 
     // bumps the game to the next level
     method void IncreasePoints() {
-	var String tString;
+		var String tString;
         let score = score + 5;
 		if (score = 105) {
 			do grid.drawDone();
