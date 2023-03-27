@@ -70,7 +70,7 @@ call Memory.deAlloc 1
 pop temp 0
 push constant 0
 return
-function Cobra.checkRewriteHistory 0
+function Cobra.rewriteHistory 3
 push argument 0
 pop pointer 0
 push this 0
@@ -80,18 +80,6 @@ eq
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
-push pointer 0
-call Cobra.rewriteHistory 1
-pop temp 0
-push constant 0
-not
-return
-label IF_FALSE0
-push constant 0
-return
-function Cobra.rewriteHistory 3
-push argument 0
-pop pointer 0
 push this 3
 pop local 0
 push constant 0
@@ -145,6 +133,10 @@ pop local 0
 goto WHILE_EXP0
 label WHILE_END0
 push constant 0
+not
+return
+label IF_FALSE0
+push constant 0
 return
 function Cobra.posX 0
 push argument 0
@@ -197,6 +189,56 @@ eq
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
+push pointer 0
+call Cobra.TryMoveUp 1
+pop temp 0
+label IF_FALSE0
+push this 6
+push constant 2
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push pointer 0
+call Cobra.tryMoveDown 1
+pop temp 0
+label IF_FALSE1
+push this 6
+push constant 3
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push pointer 0
+call Cobra.tryMoveLeft 1
+pop temp 0
+label IF_FALSE2
+push this 6
+push constant 4
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push pointer 0
+call Cobra.tryMoveRight 1
+pop temp 0
+label IF_FALSE3
+push local 0
+push this 1
+push this 2
+call CobraGrid.checkOccupied 3
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 0
+return
+label IF_FALSE4
+push constant 0
+not
+return
+function Cobra.TryMoveUp 0
+push argument 0
+pop pointer 0
 push this 2
 push constant 24
 eq
@@ -236,12 +278,12 @@ lt
 and
 not
 and
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
 push constant 0
 return
-label IF_FALSE1
+label IF_FALSE0
 push this 1
 push constant 15
 gt
@@ -277,12 +319,12 @@ push this 2
 push constant 13
 eq
 and
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
 push constant 0
 return
-label IF_FALSE2
+label IF_FALSE1
 push this 2
 push constant 47
 eq
@@ -302,34 +344,33 @@ push constant 104
 lt
 and
 and
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 0
+return
+label IF_FALSE2
+push this 2
+push constant 4
+eq
 if-goto IF_TRUE3
 goto IF_FALSE3
 label IF_TRUE3
 push constant 0
 return
+goto IF_END3
 label IF_FALSE3
-push this 2
-push constant 4
-eq
-if-goto IF_TRUE4
-goto IF_FALSE4
-label IF_TRUE4
-push constant 0
-return
-goto IF_END4
-label IF_FALSE4
 push this 2
 push constant 1
 sub
 pop this 2
-label IF_END4
-label IF_FALSE0
-push this 6
-push constant 2
-eq
-if-goto IF_TRUE5
-goto IF_FALSE5
-label IF_TRUE5
+label IF_END3
+push constant 0
+not
+return
+function Cobra.tryMoveDown 0
+push argument 0
+pop pointer 0
 push this 2
 push constant 19
 eq
@@ -369,12 +410,12 @@ lt
 and
 not
 and
-if-goto IF_TRUE6
-goto IF_FALSE6
-label IF_TRUE6
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
 push constant 0
 return
-label IF_FALSE6
+label IF_FALSE0
 push this 1
 push constant 15
 gt
@@ -410,12 +451,12 @@ push this 2
 push constant 8
 eq
 and
-if-goto IF_TRUE7
-goto IF_FALSE7
-label IF_TRUE7
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
 push constant 0
 return
-label IF_FALSE7
+label IF_FALSE1
 push this 2
 push constant 37
 eq
@@ -435,35 +476,33 @@ push constant 104
 lt
 and
 and
-if-goto IF_TRUE8
-goto IF_FALSE8
-label IF_TRUE8
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
 push constant 0
 return
-label IF_FALSE8
+label IF_FALSE2
 push this 2
-push local 0
-call CobraGrid.sizeY 1
+push constant 126
 eq
-if-goto IF_TRUE9
-goto IF_FALSE9
-label IF_TRUE9
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
 push constant 0
 return
-goto IF_END9
-label IF_FALSE9
+goto IF_END3
+label IF_FALSE3
 push this 2
 push constant 1
 add
 pop this 2
-label IF_END9
-label IF_FALSE5
-push this 6
-push constant 3
-eq
-if-goto IF_TRUE10
-goto IF_FALSE10
-label IF_TRUE10
+label IF_END3
+push constant 0
+not
+return
+function Cobra.tryMoveLeft 0
+push argument 0
+pop pointer 0
 push this 1
 push constant 40
 eq
@@ -483,12 +522,12 @@ push constant 20
 lt
 and
 and
-if-goto IF_TRUE11
-goto IF_FALSE11
-label IF_TRUE11
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
 push constant 0
 return
-label IF_FALSE11
+label IF_FALSE0
 push this 1
 push constant 16
 eq
@@ -512,12 +551,12 @@ push constant 23
 lt
 and
 and
-if-goto IF_TRUE12
-goto IF_FALSE12
-label IF_TRUE12
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
 push constant 0
 return
-label IF_FALSE12
+label IF_FALSE1
 push this 1
 push constant 20
 eq
@@ -541,12 +580,12 @@ push constant 13
 lt
 and
 and
-if-goto IF_TRUE13
-goto IF_FALSE13
-label IF_TRUE13
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
 push constant 0
 return
-label IF_FALSE13
+label IF_FALSE2
 push this 1
 push constant 48
 eq
@@ -562,34 +601,33 @@ push constant 48
 lt
 and
 and
-if-goto IF_TRUE14
-goto IF_FALSE14
-label IF_TRUE14
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
 push constant 0
 return
-label IF_FALSE14
+label IF_FALSE3
 push this 1
 push constant 0
 eq
-if-goto IF_TRUE15
-goto IF_FALSE15
-label IF_TRUE15
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
 push constant 0
 return
-goto IF_END15
-label IF_FALSE15
+goto IF_END4
+label IF_FALSE4
 push this 1
 push constant 1
 sub
 pop this 1
-label IF_END15
-label IF_FALSE10
-push this 6
-push constant 4
-eq
-if-goto IF_TRUE16
-goto IF_FALSE16
-label IF_TRUE16
+label IF_END4
+push constant 0
+not
+return
+function Cobra.tryMoveRight 0
+push argument 0
+pop pointer 0
 push this 1
 push constant 35
 eq
@@ -609,12 +647,12 @@ push constant 20
 lt
 and
 and
-if-goto IF_TRUE17
-goto IF_FALSE17
-label IF_TRUE17
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
 push constant 0
 return
-label IF_FALSE17
+label IF_FALSE0
 push this 1
 push constant 19
 eq
@@ -638,12 +676,12 @@ push constant 23
 lt
 and
 and
-if-goto IF_TRUE18
-goto IF_FALSE18
-label IF_TRUE18
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
 push constant 0
 return
-label IF_FALSE18
+label IF_FALSE1
 push this 1
 push constant 15
 eq
@@ -667,12 +705,12 @@ push constant 13
 lt
 and
 and
-if-goto IF_TRUE19
-goto IF_FALSE19
-label IF_TRUE19
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
 push constant 0
 return
-label IF_FALSE19
+label IF_FALSE2
 push this 1
 push constant 19
 eq
@@ -688,39 +726,27 @@ push constant 48
 lt
 and
 and
-if-goto IF_TRUE20
-goto IF_FALSE20
-label IF_TRUE20
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
 push constant 0
 return
-label IF_FALSE20
+label IF_FALSE3
 push this 1
-push local 0
-call CobraGrid.sizeX 1
+push constant 126
 eq
-if-goto IF_TRUE21
-goto IF_FALSE21
-label IF_TRUE21
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
 push constant 0
 return
-goto IF_END21
-label IF_FALSE21
+goto IF_END4
+label IF_FALSE4
 push this 1
 push constant 1
 add
 pop this 1
-label IF_END21
-label IF_FALSE16
-push local 0
-push this 1
-push this 2
-call CobraGrid.checkOccupied 3
-if-goto IF_TRUE22
-goto IF_FALSE22
-label IF_TRUE22
-push constant 0
-return
-label IF_FALSE22
+label IF_END4
 push constant 0
 not
 return
