@@ -1,4 +1,5 @@
 class Cobra {
+
     // the game the cobra is playing in
     field CobraGame game;
 
@@ -34,7 +35,7 @@ class Cobra {
         let growby = Agrowby;
 
         let togrow = 0;
-	// Cobra is oriented in the right direction at first
+		// Cobra is oriented in the right direction at first
         let dir = 4;
         let lastdir = 4;
         let histSize = 512;
@@ -60,30 +61,24 @@ class Cobra {
         return;
     }
 
-    // checks if the cobra's history needs to be rewritten
-    method boolean checkRewriteHistory() {
-        if (game.getCycle() = histSize) {
-            do rewriteHistory();
-            return true;
-        }
-        return false;
-    }
-
     // rewrites the cobra's history
-    method void rewriteHistory() {
+    method boolean rewriteHistory() {
         var int i, src, dst;
-
-        let i = length;
-        let dst = 0;
-        let src = histSize - length;
-        while( i > 0 ) {
-            let histX[dst] = histX[src];
-            let histY[dst] = histY[src];
-            let src = src + 1;
-            let dst = dst + 1;
-            let i = i - 1;
-        }
-        return;
+		
+		if (game.getCycle() = histSize) {
+			let i = length;
+			let dst = 0;
+			let src = histSize - length;
+			while( i > 0 ) {
+				let histX[dst] = histX[src];
+				let histY[dst] = histY[src];
+				let src = src + 1;
+				let dst = dst + 1;
+				let i = i - 1;
+			}
+			return true;
+		}
+        return false;
     }
 
     // gets the cobra's head position
@@ -124,153 +119,173 @@ class Cobra {
 
     // method checks if we can move one more space in the current direction
     method boolean tryMove() {
-    	var CobraGrid grid;
+
+        var CobraGrid grid;
         let grid = game.getGrid();
 
-	// up
+		// up
         if (dir = 1) {
-		// walls
-		if ((posY = 24) & (~((posX > 15) & (posX < 20))) 
-		& (~((posX > 47) & (posX < 52))) 
-		& (~((posX > 71) & (posX < 76)))
-		& (~((posX > 103) & (posX < 108)))) {
-			return false;
+			do TryMoveUp();
 		}
-			
-		// attributes in audiences
-		if ((((posX > 15) & (posX < 20)) 
-		| ((posX > 47) & (posX < 52)) 
-		| ((posX > 71) & (posX < 76)) 
-		| ((posX > 103) & (posX < 108))) 
-		& (posY = 13)) {
-			return false;
-		}
-			
-		// tennis tables
-		if ((posY = 47)
-		& (((posX > 19) & (posX < 48))
-		| (posX > 75) & (posX < 104))) {
-			return false;
-		}
-			
-		// the upper edge of the field
-            	if (posY = 4) {
-                	return false;
-            	}
-            	else {
-                	let posY = posY - 1;
-            	}
-        }
 		
-	// down
+		// down
         if (dir = 2) {
-		// walls
-		if ((posY = 19) & (~((posX > 15) & (posX < 20))) 
-		& (~((posX > 47) & (posX < 52))) 
-		& (~((posX > 71) & (posX < 76)))
-		& (~((posX > 103) & (posX < 108)))) {
-			return false;
+			do tryMoveDown();
 		}
-			
-		// attributes in audiences
-		if ((((posX > 15) & (posX < 20)) 
-		| ((posX > 47) & (posX < 52)) 
-		| ((posX > 71) & (posX < 76)) 
-		| ((posX > 103) & (posX < 108))) 
-		& (posY = 8)) {
-			return false;
-		}
-			
-		// tennis tables
-		if ((posY = 37)
-		& (((posX > 19) & (posX < 48))
-		| (posX > 75) & (posX < 104))) {
-			return false;
-		}
-			
-		// the bottom edge of the field
-            	if (posY = grid.sizeY()) {
-                	return false;
-            	}
-            	else {
-                	let posY = posY + 1;
-            	}
-        }
         
-	// left
-	if (dir = 3) {
-           	// walls
-		if (((posX = 40) | (posX = 64) | (posX = 88)) 
-		& ((posY > 3) & (posY < 20))) {
-			return false;
+		// left
+		if (dir = 3) {
+			do tryMoveLeft();
 		}
 		
-		if (((posX = 16) | (posX = 48) | (posX = 72) | (posX = 104)) 
-		& ((posY > 20) & (posY < 23))) {
-			return false;
-		}
-			
-		// attributes in audiences
-		if (((posX = 20) | (posX = 52) | (posX = 76) | (posX = 107)) 
-		& ((posY > 8) & (posY < 13))) {
-			return false;
-		}
-			
-		// tennis tables
-		if (((posX = 48) | (posX = 104))
-		& ((posY > 36) & (posY < 48))) {
-			return false;
-		}
-			
-		// the left edge of the field
-            	if (posX = 0) {
-                	return false;
-            	}
-            	else {
-                	let posX = posX - 1;
-           	}
-        }
-		
-	// right
+		// right
         if (dir = 4) {
-            	// walls
-		if (((posX = 35) | (posX = 59) | (posX = 83)) 
-		& ((posY > 3) & (posY < 20))) {
-			return false;
+			do tryMoveRight();
 		}
 		
-		if (((posX = 19) | (posX = 51) | (posX = 75) | (posX = 107)) 
-		& ((posY > 20) & (posY < 23))) {
-			return false;
-		}
-			
-		// attributes in audiences
-		if (((posX = 15) | (posX = 47) | (posX = 71) | (posX = 103)) 
-		& ((posY > 8) & (posY < 13))) {
-			return false;
-		}
-			
-		// tennis tables
-		if (((posX = 19) | (posX = 75))
-		& ((posY > 36) & (posY < 48)))
-		{
-			return false;
-		}
-			
-		// the right edge of the field
-            	if (posX = grid.sizeX()) {
-                	return false;
-            	}
-            	else {
-                	let posX = posX + 1;
-            	}
-        }
-
         // check if the cobra has hit itself
         if (grid.checkOccupied(posX, posY)) {
             return false;
         }
         return true;
+    }
+	
+	method boolean TryMoveUp() {
+			// walls
+			if ((posY = 24) & (~((posX > 15) & (posX < 20))) 
+			& (~((posX > 47) & (posX < 52))) 
+			& (~((posX > 71) & (posX < 76)))
+			& (~((posX > 103) & (posX < 108)))) {
+				return false;
+			}
+			
+			// attributes in audiences
+			if ((((posX > 15) & (posX < 20)) 
+			| ((posX > 47) & (posX < 52)) 
+			| ((posX > 71) & (posX < 76)) 
+			| ((posX > 103) & (posX < 108))) 
+			& (posY = 13)) {
+				return false;
+			}
+			
+			// tennis tables
+			if ((posY = 47)
+			& (((posX > 19) & (posX < 48))
+			| (posX > 75) & (posX < 104))) {
+				return false;
+			}
+			
+			// the upper edge of the field
+            if( posY = 4 ) {
+                return false;
+            }
+            else {
+                let posY = posY - 1;
+            }
+			return true;
+    }
+	
+	method boolean tryMoveDown() {
+			// walls
+			if ((posY = 19) & (~((posX > 15) & (posX < 20))) 
+			& (~((posX > 47) & (posX < 52))) 
+			& (~((posX > 71) & (posX < 76)))
+			& (~((posX > 103) & (posX < 108)))) {
+				return false;
+			}
+			
+			// attributes in audiences
+			if ((((posX > 15) & (posX < 20)) 
+			| ((posX > 47) & (posX < 52)) 
+			| ((posX > 71) & (posX < 76)) 
+			| ((posX > 103) & (posX < 108))) 
+			& (posY = 8)) {
+				return false;
+			}
+			
+			// tennis tables
+			if ((posY = 37)
+			& (((posX > 19) & (posX < 48))
+			| (posX > 75) & (posX < 104))) {
+				return false;
+			}
+			
+			// the bottom edge of the field
+            if( posY = 126 ) {
+                return false;
+            }
+            else {
+                let posY = posY + 1;
+            }
+			return true;
+    }
+	
+	method boolean tryMoveLeft() {
+            // walls
+			if (((posX = 40) | (posX = 64) | (posX = 88)) 
+			& ((posY > 3) & (posY < 20))) {
+				return false;
+			}
+			if (((posX = 16) | (posX = 48) | (posX = 72) | (posX = 104)) 
+			& ((posY > 20) & (posY < 23))) {
+				return false;
+			}
+			
+			// attributes in audiences
+			if (((posX = 20) | (posX = 52) | (posX = 76) | (posX = 107)) 
+			& ((posY > 8) & (posY < 13))) {
+				return false;
+			}
+			
+			// tennis tables
+			if (((posX = 48) | (posX = 104))
+			& ((posY > 36) & (posY < 48)))
+			{
+				return false;
+			}
+			
+			// the left edge of the field
+            if( posX = 0 ) {
+                return false;
+            }
+            else {
+                let posX = posX - 1;
+            }
+			return true;
+    }
+	
+	method boolean tryMoveRight() {
+            // walls
+			if (((posX = 35) | (posX = 59) | (posX = 83)) 
+			& ((posY > 3) & (posY < 20))) {
+				return false;
+			}
+			if (((posX = 19) | (posX = 51) | (posX = 75) | (posX = 107)) 
+			& ((posY > 20) & (posY < 23))) {
+				return false;
+			}
+			
+			// attributes in audiences
+			if (((posX = 15) | (posX = 47) | (posX = 71) | (posX = 103)) 
+			& ((posY > 8) & (posY < 13))) {
+				return false;
+			}
+			
+			// tennis tables
+			if (((posX = 19) | (posX = 75))
+			& ((posY > 36) & (posY < 48)))
+			{
+				return false;
+			}
+			
+			// the right edge of the field
+            if( posX = 126 ) {
+                return false;
+            }
+            else {
+                let posX = posX + 1;
+            }
+			return true;
     }
 
     // makes the cobra grow
