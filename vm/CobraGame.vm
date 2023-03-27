@@ -2,7 +2,7 @@ function CobraGame.new 0
 push constant 5
 call Memory.alloc 1
 pop pointer 0
-call RandSeed.getSeed 0
+call StartScreen.getSeed 0
 call Random.setSeed 1
 pop temp 0
 push constant 0
@@ -319,7 +319,7 @@ push pointer 0
 call CobraGame.nextCycle 1
 pop temp 0
 push this 0
-call Cobra.checkRewriteHistory 1
+call Cobra.rewriteHistory 1
 if-goto IF_TRUE14
 goto IF_FALSE14
 label IF_TRUE14
