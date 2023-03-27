@@ -1,4 +1,4 @@
-function RandSeed.getSeed 2
+function StartScreen.getSeed 2
 push constant 0
 pop local 0
 push constant 0
